@@ -1,12 +1,32 @@
+# AdaptiveEngine: MP3 Player
+/**
+ * @PATH [design/MP3 Player.md]
+ * @REV [20260218-1523]
+ * @MODULE [SYSTEM_DOCUMENTATION]
+ * @STATUS [DRAFT | ACTIVE | DEPRECATED]
+ * @FILETYPE [ADR | CHANGE |SYS | PIR | PRD | RSP | GUIDE | SUPPORT/REFERENCE]
+ * @DESC []
+ * @CONTROLLED [X]
+ * -------------------------------------
+ * @TODO_START
+ * @TODO_END
+ * =====================================*/
+
 **MP3 Player**  
 **(Android, personal use)**
 
-* Likely focused on local playback and interface design (no AE integration).  
+playlist
+album
+artist
+genre
+image coupled
+basic controls
+persistent play widget
+
+* Local playback and interface design (no AE integration).  
 * Potential future tie-in with AE only if you decide to port UI or asset libraries later.
 
 ### **The Technical Landscape**
-
----
 
 ### **1\. The Playback Engine (The "Easy" Part)**
 
@@ -71,4 +91,3 @@ Here is a simple, actionable plan to get you started once you have Android Studi
   * `Cortex` could even automate adding intro/outro music to generated voiceovers.
 
 **My Recommendation:** Avoid building a generic music player (Path A). Instead, build an **Audio Asset Manager** (Path B). It directly serves a core user (the Creator), deepens the value of an existing product pack, and turns a "nice to have" into a defensible, strategic feature.
-
