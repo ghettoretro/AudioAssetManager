@@ -1,16 +1,3 @@
-/**
- * @PATH [src/App.css]
- * @REV [20260225-0150]
- * @MODULE [OS]
- * @STATUS [DEV]
- * @FILETYPE [HOK]
- * @DESC [Manages Web Audio API lifecycle and extracts real-time amplitude data.]
- * @COMPLIANCE [None]
- * -------------------------------------
- * @TODO_START
- * @TODO_END
- * =====================================*/
-
 #root {
   max-width: 1280px;
   margin: 0 auto;
