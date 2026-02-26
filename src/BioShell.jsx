@@ -1,5 +1,5 @@
 /**
- * @PATH [src/components/audio/BioShell.jsx]
+ * @PATH [src/BioShell.jsx]
  * @REV [20260225-0140]
  * @MODULE [PRT]
  * @STATUS [DEV]
@@ -13,7 +13,7 @@
  * @TODO_END
  * =====================================*/
 
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 import * as twgl from 'twgl.js';
 

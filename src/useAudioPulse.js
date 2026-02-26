@@ -1,5 +1,5 @@
 /**
- * @PATH [src/hooks/useAudioPulse.js]
+ * @PATH [src/useAudioPulse.js]
  * @REV [20260225-0150]
  * @MODULE [OS]
  * @STATUS [DEV]

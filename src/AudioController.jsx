@@ -1,5 +1,5 @@
 /**
- * @PATH [src/components/audio/AudioController.jsx]
+ * @PATH [src/AudioController.jsx]
  * @REV [20260225-0140]
  * @MODULE [PRT]
  * @STATUS [DEV]
@@ -12,12 +12,9 @@
  * @TODO_END
  * =====================================*/
 
-import React, { useRef } from 'react'
-
+import { useRef } from 'react'
 import BioShell from './BioShell'
-
-// Adjusted import to match the new folder structure
-import { useAudioPulse } from '../../hooks/useAudioPulse';
+import { useAudioPulse } from './useAudioPulse';
 
 // @COMPONENT
 const AudioController = ({ trackSrc }) => {
