@@ -1,16 +1,25 @@
-# AdaptiveEngine: MP3 Player
+# AdaptiveEngine: [SPC]_MOBILE_AUDIO_PLAYER
 /**
- * @PATH [design/MP3 Player.md]
- * @REV [20260218-1523]
- * @MODULE [SYSTEM_DOCUMENTATION]
- * @STATUS [DRAFT | ACTIVE | DEPRECATED]
- * @FILETYPE [ADR | CHANGE |SYS | PIR | PRD | RSP | GUIDE | SUPPORT/REFERENCE]
- * @DESC []
- * @CONTROLLED [X]
+ * @PATH [design/[SPC]_MOBILE_AUDIO_PLAYER.md]
+ * @REV 20260302-0509
+ * @MODULE [COM]
+ * @STATUS [PLAN]
+ * @FILETYPE [SPC]
+ * @DESC [Mobile guidance for early build considerations.]
+ * @COMPLIANCE [None]
  * -------------------------------------
  * @TODO_START
  * @TODO_END
  * =====================================*/
+
+### **Your First Steps**
+
+Here is a simple, actionable plan to get you started once you have Android Studio installed:
+
+1. **Follow the "First App" Tutorial:** Don't try to build the music player on day one. Your first goal is just to get comfortable with the tools. Google provides an official tutorial for building your very first, simple app. This will teach you how to create a project, work with the interface, and run the app.  
+   * **Official Guide:** [**Create your first Android app**](https://developer.android.com/codelabs/basic-android-kotlin-compose-first-app)  
+2. **Learn Kotlin Basics:** While you're playing with Android Studio, spend a little time learning the fundamental syntax of Kotlin. You don't need to be an expert, but understanding variables, functions, and basic logic will make a huge difference.  
+   * **Google's Kotlin Course:** [**Android Basics: Introduction to Kotlin**](https://developer.android.com/courses/pathways/android-development-with-kotlin-1)
 
 **MP3 Player**  
 **(Android, personal use)**
@@ -71,23 +80,3 @@ When you're ready to start exploring, here are a few key things to look into for
 * **Development Environment:** You'll want to download **Android Studio**. It's the official, all-in-one tool for building Android apps.  
 * **Programming Language:** **Kotlin** is the modern, recommended language for Android development. It's generally considered more concise and safer than the older alternative, Java.  
 * **Core Components:** For the music playback functionality itself, you'll likely work with Android's `MediaPlayer` class or, for more advanced features, the `ExoPlayer` library, which is now the recommended choice for most media apps.
-
-### **Your First Steps**
-
-Here is a simple, actionable plan to get you started once you have Android Studio installed:
-
-1. **Follow the "First App" Tutorial:** Don't try to build the music player on day one. Your first goal is just to get comfortable with the tools. Google provides an official tutorial for building your very first, simple app. This will teach you how to create a project, work with the interface, and run the app.  
-   * **Official Guide:** [**Create your first Android app**](https://developer.android.com/codelabs/basic-android-kotlin-compose-first-app)  
-2. **Learn Kotlin Basics:** While you're playing with Android Studio, spend a little time learning the fundamental syntax of Kotlin. You don't need to be an expert, but understanding variables, functions, and basic logic will make a huge difference.  
-   * **Google's Kotlin Course:** [**Android Basics: Introduction to Kotlin**](https://developer.android.com/courses/pathways/android-development-with-kotlin-1)
-
-**The Strategic "Creator Pack" Tool (The Better Path)** Let's reframe "music player" as an **"Audio Asset Manager."** Now it's not a distraction; it's a powerful, integrated tool for your **Creator Pack**.
-
-* **What it does:** Instead of playing music for fun, it's a professional tool for managing audio files for content creation. Users can upload background music tracks, sound effects, or podcast audio files.  
-* **How it integrates:**  
-  * It lives inside the `Content` or `Curate` module.  
-  * The "player" is used to preview audio clips.  
-  * When you're in the `Content` workbench building a YouTube video, you could directly pull in an approved background track from this audio library, just like you'd pull in an image.  
-  * `Cortex` could even automate adding intro/outro music to generated voiceovers.
-
-**My Recommendation:** Avoid building a generic music player (Path A). Instead, build an **Audio Asset Manager** (Path B). It directly serves a core user (the Creator), deepens the value of an existing product pack, and turns a "nice to have" into a defensible, strategic feature.
