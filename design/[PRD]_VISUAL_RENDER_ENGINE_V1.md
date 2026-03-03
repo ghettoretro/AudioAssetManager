@@ -1,19 +1,23 @@
+# AdaptiveEngine: [PRD]_VISUAL_RENDER_ENGINE_V1
 /**
- * @PATH [docs/02_design/[SPC]_PRD2_VISUAL_RENDER_ENGINE.md]
- * @REV 20260302-0552
- * @MODULE [COM]
- * @STATUS [PLAN]
- * @FILETYPE [SPC]
+ * @PATH [design/[PRD]_VISUAL_RENDER_ENGINE_V1.md]
+ * @REV [20260303-0141]
+ * @MODULE [DOC]
+ * @CLASS [INT]
+ * @STATUS [WIP]
+ * @FILETYPE [PRD]
  * @DESC [Visual Render Engine (The Bio-Shell) API and Architecture Specification]
- * @COMPLIANCE [None]
  * -------------------------------------
  * @TODO_START
  * [*] Define specific GLSL shader string storage and loading mechanism
  * [?] Confirm performance overhead of Kuwahara filter on lower-end GPUs
+ * [!|?|*|+|-|&|$|:]
  * @TODO_END
  * =====================================*/
+## Changelog
+[*] GLSL storage mechanism changed from JSON to Vite (electron-vite) native ?raw import syntax.
 
-## 1. The Architectural Pillars
+## 1. Architecture
 * **Irregular Silhouette:** Break the "rectangular container" mental model. If the outer boundary isn't a 90° box, the brain stops seeing "software" and starts seeing "object." Irregular silhouettes and soft edges sell the effect more than texture detail.
 * **Implementation:** Use SVG `mask-image` or `clip-path` for the root container.
 * **Soft Boundary Integration:** Use alpha-feathered edges and inner glows to eliminate the "box sitting on a desktop" feel. This hides aliasing and anchors the UI into the OS environment.
@@ -34,14 +38,16 @@
 * **Skin Configuration Payload:** A JSON standard defining a skin's requirements.
   * `id`: String.
   * `type`: Enum ('2D_SHADER', '3D_MESH').
-  * `shaders`: Object containing base64 encoded or raw string Vertex and Fragment GLSL code.
+  * `shaders`: Object containing file reference IDs for Vertex and Fragment GLSL code.
   * `textures`: Array of required assets (e.g., Normal Maps, Flow Maps).
-* **Dynamic Material Mounting:** A functional React component that parses the active skin JSON, pre-loads textures via R3F's `useTexture`, and mounts the appropriate `<shaderMaterial>`. Unmounting instantly purges the old WebGL programs from GPU memory.
+* **Dynamic Material Mounting:** A functional React component that parses the active skin JSON, pre-loads textures via R3F's `useTexture`, and mounts the appropriate `<shaderMaterial>`. 
+* **GLSL File Handling:** Shader code is dynamically imported as raw strings utilizing Vite's `?raw` import syntax (e.g., `import fragmentShader from './skins/zerg/frag.glsl?raw'`). Unmounting instantly purges the old WebGL programs from GPU memory.
 
 ## 5. The Render Pipeline (Post-Processing Stack)
 * **Effect Composer:** Utilizing `@react-three/postprocessing` to handle universal visual polish.
 * **Conditional Passes:** * **Zerg Skin:** Triggers `<Bloom>` and `<ChromaticAberration>`.
   * **Van Gogh Skin:** Triggers a custom Kuwahara filter pass and `<Noise>`.
+* **Adaptive Degradation:** If the `useFrame` delta indicates the framerate has dropped below 45 FPS for more than 2 seconds, the render engine automatically disables the heaviest post-processing passes (e.g., Kuwahara or high-radius Bloom) and falls back to a cheaper aesthetic to preserve audio-visual synchronization.
 
 ## 6. Skin Profiles & Visual Layers
 *Three.js / React Three Fiber is the "Professional" route for executing these visual layers.*
@@ -70,16 +76,4 @@
 * **The "Breathing" Fallback:** GLSL logic utilizing `mix(uTime * sineWave, fftData)` to ensure continuous fluid motion during playback pauses or silent track intros.
 * **The Mini-Player Toggle:** Triggers a state flip (`isTruthMode: false`).
   * Completely unmounts the R3F `<Canvas>` component to release GPU context.
-  * Fires IPC payload to Electron: `window:resizeToMini` (snaps to a rigid, standard rectangular grid layout, drops transparency).
-
----
-
-## 8. Longview Goal & Integration Context
-**The Alpha Test:** If you can’t get a simple GLSL sphere to pulse rhythmically to a frequency range in React, the Hivemind implementation will indeed be too heavy. 
-
-**Comparison: UI Skins Strategy**
-| Aspect | Skin 1: "Archaic/Mechanical" | Skin 2: "Bioluminescent/Organic" |
-| :--- | :--- | :--- |
-| **Visual Focus** | Gear ratios, brass, ticking, pressure gauges. | Fluid dynamics, neural pulses, soft glow. |
-| **Mapping Tech** | FFT Bass -> Gear rotation speed. | FFT Mids/Highs -> Shader displacement (ripples). |
-| **Framer Role** | Layout transitions and tactile "clicks." | Organic "breathing" loops. |
+  * Fires IPC payload to Electron: `window:setMode` passing Enum `('TRUTH', 'MINI')` to snap to a rigid, standard rectangular grid layout and drop transparency.
