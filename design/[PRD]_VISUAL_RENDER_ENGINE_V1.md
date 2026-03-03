@@ -2,11 +2,11 @@
 /**
  * @PATH [design/[PRD]_VISUAL_RENDER_ENGINE_V1.md]
  * @REV [20260303-0141]
- * @MODULE [DOC]
+ * @MODULE [AURALIS]
  * @CLASS [INT]
  * @STATUS [WIP]
  * @FILETYPE [PRD]
- * @DESC [Visual Render Engine (The Bio-Shell) API and Architecture Specification]
+ * @DESC [Visual Render Engine (The Shell) API and Architecture Specification]
  * -------------------------------------
  * @TODO_START
  * [*] Define specific GLSL shader string storage and loading mechanism
@@ -40,7 +40,7 @@
   * `type`: Enum ('2D_SHADER', '3D_MESH').
   * `shaders`: Object containing file reference IDs for Vertex and Fragment GLSL code.
   * `textures`: Array of required assets (e.g., Normal Maps, Flow Maps).
-* **Dynamic Material Mounting:** A functional React component that parses the active skin JSON, pre-loads textures via R3F's `useTexture`, and mounts the appropriate `<shaderMaterial>`. 
+* **Dynamic Material Mounting:** A functional React component that parses the active skin JSON, pre-loads textures via R3F's `useTexture`, and mounts the appropriate `<shaderMaterial>`.
 * **GLSL File Handling:** Shader code is dynamically imported as raw strings utilizing Vite's `?raw` import syntax (e.g., `import fragmentShader from './skins/zerg/frag.glsl?raw'`). Unmounting instantly purges the old WebGL programs from GPU memory.
 
 ## 5. The Render Pipeline (Post-Processing Stack)

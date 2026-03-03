@@ -2,7 +2,7 @@
 /**
  * @PATH [design/[PRD]_CORE_AUDIO_ENGINE_V1.md]
  * @REV [20260303-0140]
- * @MODULE [DOC]
+ * @MODULE [AURALIS]
  * @CLASS [INT]
  * @STATUS [WIP]
  * @FILETYPE [PRD]
