@@ -81,24 +81,22 @@ export const AudioEngineProvider = ({ children }) => {
   }, [handleTrackEnd])
 
   // --- 3. Playback Controls ---
-  const playTrack = useCallback(
-    async (track) => {
-      initAudioGraph()
-      if (audioContextRef.current.state === 'suspended') {
-        await audioContextRef.current.resume()
-      }
+  const playTrack = useCallback(async (track) => {
+    initAudioGraph()
+    if (audioContextRef.current.state === 'suspended') {
+      await audioContextRef.current.resume()
+    }
 
-      const mediaUrl = `local-media://${encodeURIComponent(track.audioSrc)}`
-
-      audioNodeRef.current.src = mediaUrl
-      audioNodeRef.current.load()
-      audioNodeRef.current.play()
-
-      setCurrentTrack(track)
-      setStatus('PLAYING')
-    },
-    [initAudioGraph]
-  )
+    // Format as a query parameter so Chromium doesn't choke on Windows drive letters
+    const mediaUrl = `local-media://request?path=${encodeURIComponent(track.audioSrc)}`
+    
+    audioNodeRef.current.src = mediaUrl
+    audioNodeRef.current.load()
+    audioNodeRef.current.play()
+    
+    setCurrentTrack(track)
+    setStatus('PLAYING')
+  }, [initAudioGraph])
 
   const togglePlayback = useCallback(() => {
     if (!audioNodeRef.current || !currentTrack) return

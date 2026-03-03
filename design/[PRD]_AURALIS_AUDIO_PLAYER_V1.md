@@ -1,4 +1,4 @@
-# AdaptiveEngine: [PRD]_AURALIS_AUDIO_PLAYER_V1
+# AuralisAudio: [PRD]_AURALIS_AUDIO_PLAYER_V1
 /**
  * @PATH [design/[PRD]_AURALIS_AUDIO_PLAYER_V1.md]
  * @REV [20260303-0152]
@@ -65,21 +65,6 @@ This master document governs two explicitly isolated sub-systems.
 
 ---
 
-# AdaptiveEngine: [PRD]_LOCAL_MUSIC_PLAYER_V1
-/**
- * @PATH [design/[PRD]_LOCAL_MUSIC_PLAYER_V1.md]
- * @REV [20260303-0140]
- * @MODULE [DOC]
- * @CLASS [INT]
- * @STATUS [WIP]
- * @FILETYPE [PRD]
- * @DESC [Project overview of the Local Music Player App.]
- * -------------------------------------
- * @TODO_START
- * [!|?|*|+|-|&|$|:]
- * @TODO_END
- * =====================================*/
-
 ## Overview of Project
 This is to test out the execution of a prototype music player.
 
@@ -109,7 +94,6 @@ This is to test out the execution of a prototype music player.
 * Subtle animations on track transition and play/pause actions.
 
 ## Build & Core Framework (Dev Dependencies)
-
 * **electron:** The Chromium/Node wrapper.
 * **electron-vite:** The bundler (compiles Main and Renderer processes simultaneously).
 * **vite & @vitejs/plugin-react:** The dev server and React compiler.
@@ -128,62 +112,28 @@ This is to test out the execution of a prototype music player.
 * **@react-three/postprocessing:** The effect composer required for the Bloom, Noise, and custom Kuwahara filter passes.
 * **framer-motion:** Handled via standard DOM nodes for the "Mini Player" state transitions and strictly standard UI overlay elements.
 
-Initialization Command
-If you are bootstrapping from scratch, the standard initialization command handles the boilerplate directory structure (Main, Preload, Renderer):
-npm create @quick-start/electron my-audio-player -- --template react
-
-✔ Add TypeScript? … No
-✔ Add Electron updater plugin? … Yes
-✔ Enable Electron download mirror proxy? … Yes
-
-  cd my-audio-player
-  npm install
-  npm run dev
-
-npm warn Unknown project config "electron_mirror". This will stop working in the next major version of npm.
-npm warn Unknown project config "electron_builder_binaries_mirror". This will stop working in the next major version of npm.
-npm warn deprecated rimraf@2.6.3: Rimraf versions prior to v4 are no longer supported
-npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
-npm warn deprecated lodash.isequal@4.5.0: This package is deprecated. Use require('node:util').isDeepStrictEqual instead.
-npm warn deprecated glob@7.2.3: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting <i@izs.me>
-npm warn deprecated boolean@3.2.0: Package no longer supported. Contact Support at <https://www.npmjs.com/support> for more info.
-npm warn deprecated glob@10.5.0: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting <i@izs.me>
-
-> my-audio-player@1.0.0 postinstall
-> electron-builder install-app-deps
-
-  • electron-builder  version=26.8.1
-  • loaded configuration  file=/workspaces/AudioAssetManager/my-audio-player/electron-builder.yml
-  • executing @electron/rebuild  electronVersion=39.7.0 arch=x64 buildFromSource=false workspaceRoot=/workspaces/AudioAssetManager/my-audio-player projectDir=./ appDir=./
-  • installing native dependencies  arch=x64
-  • completed installing native dependencies
-
-Following that, the installation of our specific runtime stack:
-npm install three @react-three/fiber @react-three/drei @react-three/postprocessing framer-motion music-metadata
-
-Legacy Files
-[BioShell.jsx]
- * Renders a reactive, organic UI shell using twgl.js and GLSL. Uses a basic 'pulsing' noise. To integrate with AE, pass AnalyserNode data as a uniform.
-
-[useAudioPulse.js]
- * Manages Web Audio API lifecycle and extracts real-time amplitude data.
-
-[AudioController.jsx]
- * Master controller for Bio-UI and Web Audio integration.
-
-[SidebarMusicPlayer.jsx]
- * Native HTML5 audio player with local folder playback and advanced playback controls.
-
-[AudioAssetManager.jsx]
- * Manages the viewing, playback, and deletion of audio assets that have been ingested into the system.
-
 ## 8. Longview Goal & Integration Context
 **The Alpha Test:** If you can’t get a simple GLSL sphere to pulse rhythmically to a frequency range in React, the Hivemind implementation will indeed be too heavy.
 
-**Comparison: UI Skins Strategy**
 
-| Aspect | Skin 1: "Archaic/Mechanical" | Skin 2: "Bioluminescent/Organic" |
-| :--- | :--- | :--- |
-| **Visual Focus** | Gear ratios, brass, ticking, pressure gauges. | Fluid dynamics, neural pulses, soft glow. |
-| **Mapping Tech** | FFT Bass -> Gear rotation speed. | FFT Mids/Highs -> Shader displacement (ripples). |
-| **Framer Role** | Layout transitions and tactile "clicks." | Organic "breathing" loops. |
+1. Window Management (The App Frame)
+Drag Zone: A designated blank area (usually at the top) that has -webkit-app-region: drag so the user can move the frameless window.
+Mode Toggle: A button to snap between this freeform "Bio-Shell" mode and a traditional, rigid "Mini-Player".
+Standard OS Controls: Close and Minimize buttons (optional, but highly recommended for frameless apps).
+window shapes
+
+1. Library & Global Controls (The Header)
+Skin Selector: A dropdown or toggle to cycle through your JSON themes.
+Directory Loader: The "+ Load Music" button to trigger the IPC directory scan.
+Global Settings/Config toggle: An icon/button to open an eventual preferences menu.
+
+1. The Track List (The Body)
+Scrollable Container: Needs to handle overflowing lists elegantly without breaking the window shape.
+Track Items: Title, Artist, and visual indicators for "Currently Playing" vs "Idle" vs "Hovered".
+
+1. The Player Deck (The Footer)
+Transport: Play, Pause, Next, Previous.
+Progress Bar: Scrubbing: The interactive progress bar (we will make this clickable later).
+Timers: Current time (e.g., 1:24) and Total time (4:05).
+Volume Control: Volume slider, Mute toggle.
+Now Playing Meta: Album Art thumbnail (if you want to parse and extract it from the ID3 tags later), Track Title, Artist.

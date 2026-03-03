@@ -1,4 +1,4 @@
-# AdaptiveEngine: [PRD]_VISUAL_RENDER_ENGINE_V1
+# AuralisAudio: [PRD]_VISUAL_RENDER_ENGINE_V1
 /**
  * @PATH [design/[PRD]_VISUAL_RENDER_ENGINE_V1.md]
  * @REV [20260303-0141]
@@ -48,6 +48,12 @@
 * **Conditional Passes:** * **Zerg Skin:** Triggers `<Bloom>` and `<ChromaticAberration>`.
   * **Van Gogh Skin:** Triggers a custom Kuwahara filter pass and `<Noise>`.
 * **Adaptive Degradation:** If the `useFrame` delta indicates the framerate has dropped below 45 FPS for more than 2 seconds, the render engine automatically disables the heaviest post-processing passes (e.g., Kuwahara or high-radius Bloom) and falls back to a cheaper aesthetic to preserve audio-visual synchronization.
+
+| Aspect | Skin 1: "Archaic/Mechanical" | Skin 2: "Bioluminescent/Organic" |
+| :--- | :--- | :--- |
+| **Visual Focus** | Gear ratios, brass, ticking, pressure gauges. | Fluid dynamics, neural pulses, soft glow. |
+| **Mapping Tech** | FFT Bass -> Gear rotation speed. | FFT Mids/Highs -> Shader displacement (ripples). |
+| **Framer Role** | Layout transitions and tactile "clicks." | Organic "breathing" loops. |
 
 ## 6. Skin Profiles & Visual Layers
 *Three.js / React Three Fiber is the "Professional" route for executing these visual layers.*

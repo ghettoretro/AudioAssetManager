@@ -12,13 +12,27 @@
  * [*] Implement JSON disk read/write for library and settings caches
  * @TODO_END
  * =====================================*/
-
+/* eslint-env node */
 import { app, shell, BrowserWindow, ipcMain, dialog, protocol, net, globalShortcut } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import { pathToFileURL } from 'url'
 import { CacheManager } from './services/cacheManager.js'
 import { LibraryScanner } from './services/libraryScanner.js'
+
+// Register the custom protocol as privileged BEFORE the app is ready
+protocol.registerSchemesAsPrivileged([
+  {
+    scheme: 'local-media',
+    privileges: {
+      standard: true,
+      secure: true,
+      bypassCSP: true,
+      supportFetchAPI: true,
+      stream: true // <--- THIS IS THE CRITICAL FLAG FOR AUDIO TAGS
+    }
+  }
+])
 
 let mainWindow
 
@@ -31,7 +45,7 @@ function createWindow() {
     transparent: true,
     autoHideMenuBar: true,
     webPreferences: {
-      preload: join(__dirname, '../preload/index.js'),
+      preload: join(__dirname, '../preload/index.js'), // '__dirname' is not defined.
       sandbox: false,
       webSecurity: true
     }
@@ -46,10 +60,10 @@ function createWindow() {
     return { action: 'deny' }
   })
 
-  if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
-    mainWindow.loadURL(process.env['ELECTRON_RENDERER_URL'])
+  if (is.dev && process.env['ELECTRON_RENDERER_URL']) { // 'process' is not defined.
+    mainWindow.loadURL(process.env['ELECTRON_RENDERER_URL']) // 'process' is not defined.
   } else {
-    mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
+    mainWindow.loadFile(join(__dirname, '../renderer/index.html')) // '__dirname' is not defined.
   }
 }
 
@@ -75,8 +89,10 @@ app.whenReady().then(() => {
 
   // Register custom protocol to bypass CORS for local audio files in Web Audio API
   protocol.handle('local-media', (request) => {
-    const filePath = request.url.replace('local-media://', '')
-    return net.fetch(pathToFileURL(decodeURIComponent(filePath)).toString())
+    // Extract the absolute path from the search parameter
+    const url = new URL(request.url)
+    const filePath = decodeURIComponent(url.searchParams.get('path'))
+    return net.fetch(pathToFileURL(filePath).toString())
   })
 
   // --- IPC Handlers ---
@@ -141,7 +157,7 @@ app.on('will-quit', () => {
 })
 
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
+  if (process.platform !== 'darwin') { // 'process' is not defined.
     app.quit()
   }
 })

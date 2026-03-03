@@ -1,4 +1,4 @@
-# AdaptiveEngine: README
+# AuralisAudio: README
 /**
  * @PATH [README.md]
  * @REV [20260303-0526]

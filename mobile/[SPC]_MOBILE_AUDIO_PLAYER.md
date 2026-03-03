@@ -1,4 +1,4 @@
-# AdaptiveEngine: [SPC]_MOBILE_AUDIO_PLAYER
+# AuralisAudio: [SPC]_MOBILE_AUDIO_PLAYER
 /**
  * @PATH [design/[SPC]_MOBILE_AUDIO_PLAYER.md]
  * @REV 20260302-0509

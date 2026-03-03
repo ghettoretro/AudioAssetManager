@@ -16,16 +16,17 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 import { AudioEngineProvider } from './contexts/AudioEngineProvider'
 import { LibraryProvider } from './contexts/LibraryProvider'
-
-// If the boilerplate generated an assets/main.css or index.css, keep that import here
-// import './assets/index.css'
+import { SkinProvider } from './contexts/SkinProvider'
+import '../src/assets/main.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <LibraryProvider>
-      <AudioEngineProvider>
-        <App />
-      </AudioEngineProvider>
-    </LibraryProvider>
+    <SkinProvider>
+      <LibraryProvider>
+        <AudioEngineProvider>
+          <App />
+        </AudioEngineProvider>
+      </LibraryProvider>
+    </SkinProvider>
   </React.StrictMode>
 )

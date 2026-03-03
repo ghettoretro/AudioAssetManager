@@ -34,7 +34,7 @@ export const CacheManager = {
     try {
       const data = await fs.readFile(LIBRARY_FILE, 'utf-8')
       return JSON.parse(data)
-    } catch (error) {
+    } catch (error) { // 'error' is defined but never used.
       // Return empty schema if file doesn't exist yet
       return { tracks: [], albums: [], artists: [], playlists: [] }
     }
@@ -54,7 +54,7 @@ export const CacheManager = {
     try {
       const data = await fs.readFile(PREFS_FILE, 'utf-8')
       return JSON.parse(data)
-    } catch (error) {
+    } catch (error) { // 'error' is defined but never used.
       // Default preferences schema
       return {
         settings: {

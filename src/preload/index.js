@@ -46,7 +46,7 @@ const api = {
   }
 }
 
-if (process.contextIsolated) {
+if (process.contextIsolated) { // 'process' is not defined.
   try {
     contextBridge.exposeInMainWorld('electronAPI', api)
   } catch (error) {
