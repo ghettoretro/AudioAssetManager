@@ -61,7 +61,6 @@ This master document governs two explicitly isolated sub-systems.
 1. **Zero-Latency Sync:** Visual deformations (e.g., Zerg shell pulses) perfectly align with audio transients with no perceptible delay.
 2. **Uninterrupted Playback:** Switching between Mini Mode and Truth Mode (unmounting the WebGL canvas) does not interrupt the audio stream or cause stuttering.
 3. **Performant Baseline:** Application maintains 60 FPS in Truth Mode on mid-tier hardware; gracefully degrades effects to preserve audio sync on lower-end hardware.
-4.  
 
 ---
 
